@@ -10,7 +10,8 @@ function Logo() {
             src={LogoImg}
             width="30"
             height="30"
-            className="d-inline-block align-top me-2" />
+            className="d-inline-block align-top me-2"
+            alt= "Logo" />
         D-store
     </Navbar.Brand>;
 }
