@@ -16,3 +16,9 @@ To start app
 ## Create catalog page and transition between
 
 ![Example](/images/catalog.png)
+
+# 8 Laba
+
+## Add fuctionality and create item page
+
+![Example](/images/item.png)
