@@ -11,7 +11,7 @@ function rightSlice(text) {
     }
 }
 
-function TileCard({ data: props , key}) {
+function TileCard({ data: props}) {
     let nav = useNavigate();
     return <Card className="tile-card p-0 border-0" onClick={()=>nav(`/catalog/${props.id}`)}>
         <Card.Img variant="top" src={props.imageUrls[0]} className='rounded' />
