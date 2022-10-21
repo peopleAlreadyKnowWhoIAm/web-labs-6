@@ -26,7 +26,7 @@ function Home(props) {
             });
 
         }
-        else if (loadedProducts.length === value.length || loadedProducts.length > 12) {
+        else if (loadedProducts.length === back.length || loadedProducts.length > 12) {
             navigate("/catalog");
         } else {
             let mrows = back.slice(0, loadedProducts.length + 3);
