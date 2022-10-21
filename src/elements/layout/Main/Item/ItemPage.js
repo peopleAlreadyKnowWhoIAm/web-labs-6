@@ -1,27 +1,26 @@
 import DataContext from "data/Context";
-import FilteringColumn from "elements/components/FormColumn/FilteringColumn";
 import NumInput from "elements/components/FormColumn/NumInput/NumInput";
 import TextWithGap from "elements/components/TextWithGap/TextWithGap";
 import { useContext, useEffect, useState } from "react";
-import { Col, Row, Carousel, Container, Form, Button, Spinner } from "react-bootstrap";
+import { Col, Row, Carousel, Container, Button, Spinner } from "react-bootstrap";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 import './ItemPage.scss';
 
 export default function ItemPage() {
-    let id = useLoaderData();
+    const id = useLoaderData();
     const { loadAllById } = useContext(DataContext);
     let nav = useNavigate();
 
 
     const [dec, setdec] = useState(undefined);
-    function load() {
+    const load = () => {
         loadAllById(id).then((val) => {
             setdec(val);
         })
     };
 
-    useEffect(load, []);
+    useEffect(load, [id, loadAllById]);
 
 
     const [amount, setAmount] = useState(0);
@@ -34,7 +33,7 @@ export default function ItemPage() {
                     <Col>
                         <Carousel slide={false}>
                             {dec.imageUrls.map((val, index) => <Carousel.Item key={index}>
-                                <img src={val} className="d-block w-100" style={{ objectFit: "cover", height: 500 }} />
+                                <img alt={`${index}`} src={val} className="d-block w-100" style={{ objectFit: "cover", height: 500 }} />
                             </Carousel.Item>)}
                         </Carousel>
                     </Col>

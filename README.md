@@ -22,3 +22,8 @@ To start app
 ## Add fuctionality and create item page
 
 ![Example](/images/item.png)
+
+
+# 9 Laba
+
+## Load data using axios
