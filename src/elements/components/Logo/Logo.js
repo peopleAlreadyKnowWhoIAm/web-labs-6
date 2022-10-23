@@ -2,7 +2,6 @@ import { Navbar } from "react-bootstrap";
 
 import LogoImg from "./logo.svg"
 
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function Logo() {
     return <Navbar.Brand style={{lineHeight:"30px"}}>

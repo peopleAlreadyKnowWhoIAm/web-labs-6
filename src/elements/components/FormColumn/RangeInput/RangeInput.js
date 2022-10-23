@@ -37,14 +37,11 @@ function RangeInput({ label, state }) {
         setValue({ from: value.from, to: num });
     };
 
-    let classes = "width-form d-inline-block";
-
-    let invalidClasses = classes + " is-invalid";
     return (
         <FilteringColumn label={label}>
-            <Form.Control className={((errors.from) ? invalidClasses : classes) + " me-2"} placeholder="From" onChange={callbackFrom} />
+            <Form.Control className= "width-form d-inline-block me-2" placeholder="From" onChange={callbackFrom}  isInvalid={errors.from}/>
 
-            <Form.Control className={((errors.to) ? invalidClasses : classes)} placeholder="To" onChange={callbackTo} />
+            <Form.Control className="width-form d-inline-block" placeholder="To" onChange={callbackTo} isInvalid={errors.to} />
         </FilteringColumn>
     );
 }

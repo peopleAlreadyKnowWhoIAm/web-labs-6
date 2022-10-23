@@ -27,3 +27,7 @@ To start app
 # 9 Laba
 
 ## Load data using axios
+
+# 10 Laba
+
+## Create cart page using Redux
