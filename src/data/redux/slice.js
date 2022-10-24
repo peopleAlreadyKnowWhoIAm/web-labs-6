@@ -23,11 +23,14 @@ const cartSlice = createSlice({
         },
         removeProduct: (state, action) => {
             state.splice(state.findIndex((val) => val.id === action.payload.id), 1);
+        },
+        clearProducts: (state) => {
+            return [];
         }
     }
 })
 
-export const {addProduct, updateProduct, removeProduct} = cartSlice.actions;
+export const {addProduct, updateProduct, removeProduct, clearProducts} = cartSlice.actions;
 
 export const getListOfProducts = (state) => state.cart;
 

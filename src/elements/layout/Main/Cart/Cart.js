@@ -33,7 +33,7 @@ export default function Cart() {
                 <Row>
                     <Button variant="outline-primary" className="width-12" onClick={goToCatalog}>Back to catalog</Button>
                     <Col className="flex-grow-1" />
-                    <Button variant="primary" className="width-12">Buy</Button>
+                    <Button variant="primary" className="width-12" onClick={() => nav("/cart/checkout")}>Buy</Button>
                 </Row>
             </>
 

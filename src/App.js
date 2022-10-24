@@ -2,11 +2,11 @@ import {RouterProvider} from 'react-router-dom';
 
 import DataContext from "data/Context";
 
-import routesMap from "elements/routes/Routes";
 import { loadMainByFilter, loadAllById } from "data/dataReceive";
 import { useState } from "react";
 
 import './App.scss';
+import Router from 'elements/routes/Router';
 
 function App() {
     // receiveImage(1).then((val)=> console.log(val));
@@ -22,7 +22,7 @@ function App() {
                 return res;
             }), loadAllById
         }}>
-            <RouterProvider router={routesMap()} />
+            <Router/>
         </DataContext.Provider>
     </>
     );

@@ -31,3 +31,7 @@ To start app
 # 10 Laba
 
 ## Create cart page using Redux
+
+# 11 Laba
+
+## Make validation of the form using Formik
