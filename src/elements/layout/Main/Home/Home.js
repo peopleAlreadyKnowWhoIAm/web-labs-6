@@ -1,5 +1,5 @@
 
-import DataContext from 'data/Context';
+import DataContext from 'data/DataContext';
 import { useContext, useEffect, useState } from 'react';
 import { Button, Col, Container, Image, Row, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';

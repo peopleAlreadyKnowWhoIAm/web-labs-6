@@ -1,4 +1,4 @@
-import DataContext from "data/Context";
+import DataContext from "data/DataContext";
 import { useContext, useEffect, useState } from "react";
 import { Col, Spinner } from "react-bootstrap";
 import ProductCard from "./ProductCard/ProductCard";
