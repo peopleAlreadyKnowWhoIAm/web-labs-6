@@ -2,13 +2,14 @@ import AuthContext from "data/AuthContext";
 import { useFormik } from "formik";
 import { useContext } from "react";
 import { Button, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 
 export default function Sign() {
     const { registerUser } = useContext(AuthContext);
 
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -25,6 +26,7 @@ export default function Sign() {
         }),
         onSubmit: (values) => {
             registerUser({ username: values.username, email: values.email, password: values.password });
+            navigate("/", {replace: true});
         }
     });
     return (<Container as="main">

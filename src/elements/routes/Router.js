@@ -15,27 +15,17 @@ import Sign from "elements/layout/login/Sign";
 import { useContext } from "react";
 import AuthContext from "data/AuthContext";
 import { userStatusMap } from "./Auth";
-
+import RequiredAuth from "./RequiredAuth";
 
 
 
 export default function Router() {
-    const {status, registerUser, checkLogin} = useContext(AuthContext);
     
-    const authLoader = () => {
-        if(status === userStatusMap.singout) {
-            return redirect("/login");
-        } else if(status === userStatusMap.notRegistered){
-            return redirect("/login/sign");
-        }
-
-    }
 
     return <RouterProvider router={createBrowserRouter([
         {
             path: "/",
-            element: <RootLayout />,
-            loader: authLoader,
+            element: <RequiredAuth><RootLayout /></RequiredAuth>,
             errorElement: <RootLayout><ErrorPage /></RootLayout>,
             children: [
                 {

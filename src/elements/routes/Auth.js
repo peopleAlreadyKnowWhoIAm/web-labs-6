@@ -29,7 +29,6 @@ function confirmLogin(user) {
     const userSaved = loadUser();
     let res = user.email === userSaved.email && user.password === userSaved.password;
     if(res) {
-        sessionStorage.setItem('loggedIn', true);
         return true;
     }
     return false;
@@ -48,7 +47,7 @@ export const userStatusMap = {
 
 
 function discoverStatus(){
-    if(checkLogginStatus){
+    if(checkLogginStatus()){
         return userStatusMap.loggedIn;
     } else if(loadUser() === null){
         return userStatusMap.notRegistered;
@@ -57,16 +56,18 @@ function discoverStatus(){
 }
 
 export default function AuthProvider({ children }) {
-    const [userStatus, setUserStatus] = useState(discoverStatus);
+    const [userStatus, setUserStatus] = useState(discoverStatus());
 
     const registerUser = (user) => {
         saveUser(user);
+        sessionStorage.setItem('loggedIn', true);
         setUserStatus(userStatusMap.loggedIn);
     }
 
     const checkLogin = (login) => {
         if(confirmLogin(login)){
             setUserStatus(userStatusMap.loggedIn);
+            sessionStorage.setItem('loggedIn', true);
             return true;
         } else {
             return false;
@@ -81,3 +82,4 @@ export default function AuthProvider({ children }) {
         {children}
     </AuthContext.Provider>
 }
+

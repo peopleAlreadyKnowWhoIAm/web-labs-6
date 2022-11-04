@@ -26,6 +26,7 @@ function App() {
                 <Router />
 
             </AuthProvider>
+
         </DataContext.Provider>
     </>
     );
