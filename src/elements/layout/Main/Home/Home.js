@@ -1,29 +1,31 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TileCard from 'elements/components/TileCard/TileCard';
+import DataContext from 'data/Context';
+import { useContext, useEffect, useState } from 'react';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import TileCard from './TileCard/TileCard';
 
 import MainImage from './image.png';
-
-const listOfTyleObjects = [
-    {
-        header: "FLYNGO 10 Diya 138 LED Curtain",
-        text: "Perfect to decorate your house, room, garden, tree,.6.6Ft x 3.3Ft star curtain string lights with 138 LEDs, power line length is 5.3Ft. For christmas, diwali, wedding ceremony, valentine's day, birthday party and other festivals or celebrations at home, restaurant, hotel, commercial building.",
-        src: "/dec-img3.jpg"
-    },
-    {
-        header: "X4Cart Blossom Flower Fairy String Lights",
-        text: "Blossom Flower String lights are composed of Ultra Bright Colour Micro LEDs that don't overheat giving a light fairy effect. After hours of use, they are completely safe to touch without risk of burns. The LED Starry Lights are safe for children and pets. Perfect for spicing-up your decor or creating a romantic setting.",
-        src: "/dec-img2.jpg"
-    },
-    {
-        header: "Gesto 35 Feet Long Led Power Pixel Light",
-        text: "Easy to use with an electric plug, enjoy the hassle-free application of the string Moroccan light. These can be lightened up during Diwali, Christmas, Birthdays, and other festivities & events.",
-        src: "/dec-img1.jpg"
-    }
-];
+import ProductCard from '../Catalog/Products/ProductCard/ProductCard';
 
 function Home(props) {
+    const products = useContext(DataContext).value;
+    const [rows, setRows] = useState([] );
+    const navigate = useNavigate();
+
+    useEffect(loadMore, []);
+
+    function loadMore() {
+        if (products.length <= rows.length || rows.length > 12) {
+            navigate("/catalog");
+        } else {
+            let mrows = products.slice(0, 3 + rows.length);
+            setRows(mrows);
+        }
+    }
+
+
     return (
         <Container as="main">
             <Row className='justify-content-stretch my-5 pb-5'>
@@ -36,14 +38,12 @@ function Home(props) {
                 </Col>
             </Row>
             <h3 className='text-center'>Most popular</h3>
-            <Row className='pt-3 justify-content-around'>
-                <TileCard {...(listOfTyleObjects[0])} />
-                <TileCard {...(listOfTyleObjects[1])} />
-                <TileCard {...(listOfTyleObjects[2])} />
+            <Row className='flex-wrap justify-content-between'>
+            {rows.map((val=><TileCard data={val} key={val.id}/>))}
             </Row>
-
+                
             <Row className='justify-content-center mb-5'>
-                <Button variant='primary' size='lg' className='w-auto px-5'>
+                <Button variant='primary' size='lg' className='w-auto px-5' onClick={loadMore}>
                     View More
                 </Button>
             </Row>
