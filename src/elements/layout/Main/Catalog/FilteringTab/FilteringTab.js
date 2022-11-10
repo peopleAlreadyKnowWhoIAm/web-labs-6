@@ -11,7 +11,7 @@ import './FilteringTab.scss';
 
 const options = ["Popular", "More expensive", "Cheeper", "Length"];
 
-function FilteringTab({ getDefaultProducts, setProducts }) {
+function FilteringTab({ setParams }) {
     const [priceRange, changePriceRange] = useState({ from: undefined, to: undefined });
     const [lengthRange, changeLengthRange] = useState({ from: undefined, to: undefined });
     const [sorting, changeSorting] = useState(0);
@@ -21,32 +21,16 @@ function FilteringTab({ getDefaultProducts, setProducts }) {
         console.log(priceRange);
         console.log(lengthRange);
         console.log(sorting);
-        let products = getDefaultProducts();
-        if (priceRange.from !== undefined) products = products.filter((val) => val.price > priceRange.from);
-        if (priceRange.to !== undefined) products = products.filter((val) => val.price < priceRange.to);
-        if (lengthRange.from !== undefined) products = products.filter((val) => val.length > lengthRange.from);
-        if (lengthRange.to !== undefined) products = products.filter((val) => val.length < lengthRange.to);
-
-        switch (Number(sorting)) {
-            case 0:
-                products = products.sort((a, b) => a.id - b.id);
-                break;
-            case 1:
-                products = products.sort((b, a) => a.price - b.price);
-                break;
-            case 2:
-                products = products.sort((b, a) => b.price - a.price);
-                break;
-            case 3:
-                products = products.sort((b, a) => a.length - b.length);
-                break;
+        let paramObj = {
+            sort: options[sorting],
+            'length-from': lengthRange.from,
+            'length-to': lengthRange.to,
+            'price-from': priceRange.from,
+            'price-to': priceRange.to,
+            'search':search
         }
 
-        products = products.filter((val) => val.name.toLowerCase().indexOf(search.trim().toLowerCase()) != -1);
-
-        console.log(products);
-
-        setProducts(products);
+        setParams(paramObj);
 
     };
     return (

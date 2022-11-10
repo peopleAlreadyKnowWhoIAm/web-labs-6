@@ -1,5 +1,5 @@
 
-export class ElectricDecoration {
+export default class ElectricDecoration {
   
     constructor(
     name, //String
@@ -9,7 +9,7 @@ export class ElectricDecoration {
     length, //Float
     power, //Integer
     price, //Float
-    imageUrls, //List of string 
+    imageIds, //List of string 
     id // Number
   ) {
     this.name = name;
@@ -21,7 +21,7 @@ export class ElectricDecoration {
     this.price = price;
     this.id = id;
 
-    this.imageUrls = imageUrls;
+    this.imageUrls = imageIds;
   }
 
   //Translate object and format usage

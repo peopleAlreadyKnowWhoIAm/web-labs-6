@@ -1,4 +1,5 @@
 
+import './App.scss';
 import Catalog from "elements/layout/Main/Catalog/Catalog";
 import Footer from "./elements/layout/Footer/Footer";
 import Main from "./elements/layout/Main/Home/Home";
@@ -6,20 +7,30 @@ import Navigation from "./elements/layout/Navigation/Navigation";
 
 import { BrowserRouter as Router, Route, RouterProvider, Routes, } from 'react-router-dom';
 
-import './App.scss';
 import DataContext from "data/Context";
 
-import { value, loadMore } from "./data/dataReceive";
 import routesMap from "elements/routes/Routes";
+import { loadMainByFilter, loadAllById } from "data/dataReceive";
+import { useState } from "react";
 
 
 function App() {
-    return (<div>
+    // receiveImage(1).then((val)=> console.log(val));
+    //receiveFiltered({"price-from": "24", "sort": "More expensive"});
+    const [product, setProducts] = useState([]);
 
-        <DataContext.Provider value={{ value: value, loadMore }}>
+    return (<>
+
+        <DataContext.Provider value={{
+            value: product, loadMainByFilter: (async (params) => {
+                const res = await loadMainByFilter(params);
+                setProducts(res);
+                return res;
+            }), loadAllById
+        }}>
             <RouterProvider router={routesMap()} />
         </DataContext.Provider>
-    </div>
+    </>
     );
 }
 

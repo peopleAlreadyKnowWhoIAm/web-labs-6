@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import { Col, Container, Nav, Navbar } from "react-bootstrap";
 
 import Logo from "elements/components/Logo/Logo";

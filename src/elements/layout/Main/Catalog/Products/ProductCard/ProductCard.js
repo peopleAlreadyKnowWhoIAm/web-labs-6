@@ -7,6 +7,12 @@ import './ProductCard.scss'
 function ProductCard({data}) {
     const nav = useNavigate();
 
+    if(!data.hasOwnProperty('imageUrls')){
+        data.imageUrls = [''];
+    }
+
+
+
     return (
         <Card border="primary" className="productCard m-2">
 

@@ -2,29 +2,41 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DataContext from 'data/Context';
 import { useContext, useEffect, useState } from 'react';
-import { Button, Col, Container, Image, Row } from 'react-bootstrap';
+import { Button, Col, Container, Image, Row, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import TileCard from './TileCard/TileCard';
 
 import MainImage from './image.png';
-import ProductCard from '../Catalog/Products/ProductCard/ProductCard';
 
 function Home(props) {
-    const products = useContext(DataContext).value;
-    const [rows, setRows] = useState([] );
+    const { value, loadMainByFilter} = useContext(DataContext);
+    const [loadedProducts, setloadedProducts] = useState([]);
+    const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(loadMore, []);
+    let back = [];
 
     function loadMore() {
-        if (products.length <= rows.length || rows.length > 12) {
+        if (back.length === 0) {
+            setLoading(true);
+            loadMainByFilter({ sort: "More expensive" }).then((val) => {
+                back = val;
+                loadMore();
+                setLoading(false);
+            });
+
+        }
+        else if (loadedProducts.length === value.length || loadedProducts.length > 12) {
             navigate("/catalog");
         } else {
-            let mrows = products.slice(0, 3 + rows.length);
-            setRows(mrows);
+            let mrows = back.slice(0, loadedProducts.length + 3);
+
+            setloadedProducts(mrows);
+
         }
     }
 
+    useEffect(loadMore, []);
 
     return (
         <Container as="main">
@@ -39,13 +51,15 @@ function Home(props) {
             </Row>
             <h3 className='text-center'>Most popular</h3>
             <Row className='flex-wrap justify-content-between'>
-            {rows.map((val=><TileCard data={val} key={val.id}/>))}
+
+                {loadedProducts.map((val => <TileCard data={val} key={val.id} />))}
             </Row>
-                
+            {(isLoading) ? <Col className='d-flex justify-content-center'><Spinner animation='border' /></Col> : ""}
             <Row className='justify-content-center mb-5'>
-                <Button variant='primary' size='lg' className='w-auto px-5' onClick={loadMore}>
+                {(!isLoading) ? (<Button variant='primary' size='lg' className='w-auto px-5' onClick={loadMore}>
                     View More
-                </Button>
+                </Button>) : ""
+                }
             </Row>
         </Container>
     );
