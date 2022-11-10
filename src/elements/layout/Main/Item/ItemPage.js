@@ -17,7 +17,7 @@ export default function ItemPage() {
     const [dec, setdec] = useState(undefined);
     const [inCartText, setInCartText] = useState("In cart");
     const [amount, setAmount] = useState(undefined);
-    const [errorCss, setErrorCss] = useState("invisible");
+    const [showAlert, setShowAlert] = useState(false);
 
     let inCart = useSelector(checkPresenseOnCart(id));
 
@@ -34,11 +34,11 @@ export default function ItemPage() {
 
     const goToCart = () => nav("/cart");
     const addToCart = () => {
-        if(amount) {
-            setErrorCss("invisible");
+        if (amount) {
+            setShowAlert(false);
             dispather(addProduct(dec, amount));
         } else {
-            setErrorCss("");
+            setShowAlert(true);
         }
 
     }
@@ -92,9 +92,11 @@ export default function ItemPage() {
 
                     </Row></>
             }
-            
-            {
-                <Alert variant="danger" className={errorCss}>The amount must be specified!</Alert>
+
+            {<div style={{ height: "5rem" }}>
+                <Alert variant="danger" show={showAlert}>The amount must be specified!</Alert>
+
+            </div>
             }
         </Container>
     );
