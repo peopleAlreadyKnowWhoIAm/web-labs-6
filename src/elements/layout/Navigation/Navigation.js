@@ -27,7 +27,9 @@ function Navigation() {
                             </FLink>
                         </Nav.Item>
                         <Nav.Item as="li">
-                            <Nav.Link>Cart</Nav.Link>
+                            <FLink to="/cart">
+                                <Nav.Link as="span">Cart</Nav.Link>
+                            </FLink>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>

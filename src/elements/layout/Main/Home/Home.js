@@ -1,5 +1,4 @@
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import DataContext from 'data/Context';
 import { useContext, useEffect, useState } from 'react';
 import { Button, Col, Container, Image, Row, Spinner } from 'react-bootstrap';
@@ -9,7 +8,7 @@ import TileCard from './TileCard/TileCard';
 import MainImage from './image.png';
 
 function Home(props) {
-    const { value, loadMainByFilter} = useContext(DataContext);
+    const { value, loadMainByFilter } = useContext(DataContext);
     const [loadedProducts, setloadedProducts] = useState([]);
     const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -26,7 +25,7 @@ function Home(props) {
             });
 
         }
-        else if (loadedProducts.length === value.length || loadedProducts.length > 12) {
+        else if (loadedProducts.length === back.length || loadedProducts.length > 12) {
             navigate("/catalog");
         } else {
             let mrows = back.slice(0, loadedProducts.length + 3);

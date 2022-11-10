@@ -2,33 +2,41 @@ import { useState } from "react";
 import { Form } from "react-bootstrap";
 import FilteringColumn from "../FilteringColumn";
 
-import '../FilteringColumn.scss';
 
-export default function NumInput({ label, state}) {
+export default function NumInput({ label, state, range }) {
     const [value, setValue] = state;
 
     const [error, setError] = useState(false);
+    let rangeDefined = Boolean(range);
+
+    const checkOnRange = (num) => {
+        if (rangeDefined) {
+            return (num <= range[1] && num >= range[0]);
+        }
+        return true;
+    }
 
     const callback = (e) => {
-        let num = Number(e.target.value);
-        if (Number.isNaN(num) || num <= 0) {
-            num = undefined;
-            if (e.target.value.length !== 0) setError(true);
-        }
-        else {
-
+        let str = e.target.value;
+        let num = undefined;
+        if (str.length === 0) {
             setError(false);
+        } else {
+            num = Number.parseInt(str);
+            if (Number.isNaN(num) || !checkOnRange(num)) {
+                num = undefined;
+                setError(true);
+            }
+            else {
+                setError(false);
+            }
         }
         setValue(num);
     };
 
-    let classes = "width-form mt-1";
-    if(error){
-        classes += " is-invalid";
-    }
 
     return (
         <FilteringColumn label={label}>
-            <Form.Control className={classes} onChange={callback} />
+            <Form.Control className="width-form mt-1" onChange={callback} isInvalid={error} />
         </FilteringColumn>);
 }

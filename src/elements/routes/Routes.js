@@ -5,6 +5,7 @@ import Home from "elements/layout/Main/Home/Home";
 import RootLayout from "elements/layout/RootLayout";
 import { createBrowserRouter } from "react-router-dom";
 import loader from "./CatalogLoader";
+import Cart from "elements/layout/Main/Cart/Cart";
 
 const routes = createBrowserRouter([
     {
@@ -24,7 +25,12 @@ const routes = createBrowserRouter([
                 path: "/catalog/:id",
                 loader: loader,
                 element: <ItemPage/>
+            },
+            {
+                path: "/cart",
+                element: <Cart/>
             }
+
         ]
     },
 

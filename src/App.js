@@ -1,11 +1,4 @@
-
-import './App.scss';
-import Catalog from "elements/layout/Main/Catalog/Catalog";
-import Footer from "./elements/layout/Footer/Footer";
-import Main from "./elements/layout/Main/Home/Home";
-import Navigation from "./elements/layout/Navigation/Navigation";
-
-import { BrowserRouter as Router, Route, RouterProvider, Routes, } from 'react-router-dom';
+import {RouterProvider} from 'react-router-dom';
 
 import DataContext from "data/Context";
 
@@ -13,6 +6,7 @@ import routesMap from "elements/routes/Routes";
 import { loadMainByFilter, loadAllById } from "data/dataReceive";
 import { useState } from "react";
 
+import './App.scss';
 
 function App() {
     // receiveImage(1).then((val)=> console.log(val));
