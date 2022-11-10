@@ -1,4 +1,4 @@
-import DataContext from "data/Context";
+import DataContext from "data/DataContext";
 import { useContext } from "react";
 import FilteringTab from "./FilteringTab/FilteringTab";
 import Products from "./Products/Products";

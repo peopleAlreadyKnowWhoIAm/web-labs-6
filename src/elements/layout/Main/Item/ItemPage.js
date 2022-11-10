@@ -1,4 +1,4 @@
-import DataContext from "data/Context";
+import DataContext from "data/DataContext";
 import { addProduct, checkPresenseOnCart } from "data/redux/slice";
 import NumInput from "elements/components/FormColumn/NumInput/NumInput";
 import TextWithGap from "elements/components/TextWithGap/TextWithGap";

@@ -3,21 +3,29 @@ import ItemPage from "elements/layout/Main/Item/ItemPage";
 import Catalog from "elements/layout/Main/Catalog/Catalog";
 import Home from "elements/layout/Main/Home/Home";
 import RootLayout from "elements/layout/RootLayout";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, redirect, RouterProvider } from "react-router-dom";
 import Cart from "elements/layout/Main/Cart/Cart";
 import Checkout from "elements/layout/Main/Cart/Checkout/Checkout";
 import Success from "elements/layout/Main/Cart/Checkout/Success/Success";
 import { useSelector } from "react-redux";
 import { getListOfProducts } from "data/redux/slice";
-
+import Footer from "elements/layout/Footer/Footer";
+import Login from "elements/layout/login/Login";
+import Sign from "elements/layout/login/Sign";
+import { useContext } from "react";
+import AuthContext from "data/AuthContext";
+import { userStatusMap } from "./Auth";
+import RequiredAuth from "./RequiredAuth";
 
 
 
 export default function Router() {
+    
+
     return <RouterProvider router={createBrowserRouter([
         {
             path: "/",
-            element: <RootLayout />,
+            element: <RequiredAuth><RootLayout /></RequiredAuth>,
             errorElement: <RootLayout><ErrorPage /></RootLayout>,
             children: [
                 {
@@ -46,6 +54,20 @@ export default function Router() {
                     element: <Success />
                 }
 
+            ]
+        },
+        {
+            path: "/login",
+            element: <><Outlet/><Footer/></>,
+            children:[
+                {
+                    index: true,
+                    element: <Login/>,
+                },
+                {
+                    path: "sign",
+                    element: <Sign/>,
+                }
             ]
         }
 

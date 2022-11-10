@@ -1,12 +1,13 @@
-import {RouterProvider} from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 
-import DataContext from "data/Context";
+import DataContext from "data/DataContext";
 
 import { loadMainByFilter, loadAllById } from "data/dataReceive";
 import { useState } from "react";
 
 import './App.scss';
 import Router from 'elements/routes/Router';
+import AuthProvider from 'elements/routes/Auth';
 
 function App() {
     // receiveImage(1).then((val)=> console.log(val));
@@ -21,8 +22,11 @@ function App() {
                 setProducts(res);
                 return res;
             }), loadAllById
-        }}>
-            <Router/>
+        }}><AuthProvider>
+                <Router />
+
+            </AuthProvider>
+
         </DataContext.Provider>
     </>
     );
