@@ -11,3 +11,8 @@ To start app
  npm install
  npm start
 ```
+# 7 Laba
+
+## Create catalog page and transition between
+
+![Example](/images/catalog.png)
